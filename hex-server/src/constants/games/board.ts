@@ -1,0 +1,2 @@
+export const STARTING_BOARD_FEN =
+  'bknrp1/qb2p2/n1b1p3/r3p4/ppppp5/11/5PPPPP/4P3R/3P1B1N/2P2BK/1PRNQB'

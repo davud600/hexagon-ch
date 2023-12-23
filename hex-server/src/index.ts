@@ -1,6 +1,5 @@
-import { PORT } from '@utils/env'
-
-import server from './server'
+import { server } from './server'
+import { PORT } from './utils/env'
 
 // Start server
 server.listen(PORT, () => {

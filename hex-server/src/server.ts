@@ -1,12 +1,26 @@
-import { CORS_ORIGIN } from '@utils/env'
 import cors from 'cors'
 import express, { type Router } from 'express'
+import { createServer } from 'http'
+import { Server as SocketServer } from 'socket.io'
 
-// Create express server
-const server = express()
+import { GamesEvents } from './events/games.events'
+import { RoomsEvents } from './events/rooms.events'
+import { WaitListEvents } from './events/wait-list.events'
+import { type SocketEvent } from './types/sockets'
+import { CORS_ORIGIN } from './utils/env'
 
-server.use(express.json())
-server.use(
+// Express app and socket server
+export const app = express()
+export const server = createServer(app)
+export const io = new SocketServer(server, {
+  cors: {
+    origin: CORS_ORIGIN,
+    methods: ['GET', 'POST'],
+  },
+})
+
+app.use(express.json())
+app.use(
   cors({
     origin: CORS_ORIGIN,
   })
@@ -15,7 +29,11 @@ server.use(
 // Init routes and api's
 const routes: Router[] = []
 routes.forEach((route) => {
-  server.use(route)
+  app.use(route)
 })
 
-export default server
+// Init Socket events
+const events: SocketEvent[] = [WaitListEvents, RoomsEvents, GamesEvents]
+events.forEach((event) => {
+  event()
+})
