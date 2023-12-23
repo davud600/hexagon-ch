@@ -9,15 +9,6 @@
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@constants/*": ["constants/*"],
-      "@controllers/*": ["controllers/*"],
-      "@lib/*": ["lib/*"],
-      "@routes/*": ["routes/*"],
-      "@types/*": ["types/*"],
-      "@utils/*": ["utils/*"]
-    }
+    "resolveJsonModule": true
   }
 }
