@@ -5,6 +5,10 @@ import { type Game, type GameData } from '../types/sockets/games'
 const gamesStore = new Map<string, Game>()
 
 export const GamesService = {
+  getAll: (): Game[] => {
+    return Array.from(gamesStore.values())
+  },
+
   get: (id: string): Game | Error => {
     try {
       const game = gamesStore.get(id)
@@ -29,6 +33,21 @@ export const GamesService = {
     } catch (error) {
       console.error('Failed to create game!')
       return new Error('Failed to create game!')
+    }
+  },
+
+  update: (id: string, data: Partial<GameData>): Game | Error => {
+    try {
+      const game = GamesService.get(id)
+
+      if (game instanceof Error) throw new Error(game.message)
+
+      gamesStore.set(id, { ...game, ...data })
+
+      return game
+    } catch (error) {
+      console.error('Failed to update game!')
+      return new Error('Failed to update game!')
     }
   },
 

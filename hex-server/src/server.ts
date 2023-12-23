@@ -3,8 +3,9 @@ import express, { type Router } from 'express'
 import { createServer } from 'http'
 import { Server as SocketServer } from 'socket.io'
 
-import { GamesEvents } from './events/games.events'
-import { RoomsEvents } from './events/rooms.events'
+import { GameEvents } from './events/game.events'
+import { RoomEvents } from './events/room.events'
+import { UserEvents } from './events/user.events'
 import { WaitListEvents } from './events/wait-list.events'
 import { type SocketEvent } from './types/sockets'
 import { CORS_ORIGIN } from './utils/env'
@@ -33,7 +34,12 @@ routes.forEach((route) => {
 })
 
 // Init Socket events
-const events: SocketEvent[] = [WaitListEvents, RoomsEvents, GamesEvents]
+const events: SocketEvent[] = [
+  UserEvents,
+  WaitListEvents,
+  RoomEvents,
+  GameEvents,
+]
 events.forEach((event) => {
   event()
 })
