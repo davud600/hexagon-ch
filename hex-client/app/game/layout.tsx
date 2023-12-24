@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Innovative chess application',
 }
 
-export default function Gameroom({ children }: { children: React.ReactNode }) {
+export default function Game({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full h-[100vh]">
       <Header />
