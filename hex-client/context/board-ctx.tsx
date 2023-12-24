@@ -45,6 +45,10 @@ export const BoardContext = createContext<BoardContextData>({
     whiteScore: 0,
     blackScore: 0,
   },
+  TimersState: {
+    whiteTime: 4.12,
+    blackTime: 5.2,
+  },
   viewPreviousBoardInHistory: () => false,
   viewNextBoardInHistory: () => false,
   isViewingHistory: () => false,
@@ -238,6 +242,10 @@ export function BoardProvider({ children }: { children: ReactNode }) {
     ScoreState: {
       whiteScore,
       blackScore,
+    },
+    TimersState: {
+      whiteTime: 4.12,
+      blackTime: 5.2,
     },
     viewPreviousBoardInHistory,
     viewNextBoardInHistory,

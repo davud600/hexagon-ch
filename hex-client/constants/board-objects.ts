@@ -2,6 +2,7 @@
 
 import { getBoardFromFEN } from '@/lib/board/board'
 import {
+  type ModuleColor,
   type BoardType,
   type HexagonSides,
   type HexagonSlidingSides,
@@ -15,6 +16,8 @@ export const ModuleColors = {
   legal: 'green',
   selected: 'orange',
 }
+
+export const ModuleDefaultColors: ModuleColor[] = ['dark', 'neutral', 'light']
 
 export const HexagonDirections: HexagonSides = {
   north: 'north',

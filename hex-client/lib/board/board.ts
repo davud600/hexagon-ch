@@ -1,6 +1,7 @@
 import {
   HexagonDirections,
   HexagonSlidingDirections,
+  ModuleDefaultColors,
   Pieces,
 } from '@/constants/board-objects'
 import {
@@ -21,11 +22,11 @@ import {
 } from './piece'
 
 export function getModuleColorFromRowIndex(index: number): ModuleColor {
-  if (index === 0) return 'dark'
-  if (index === 1) return 'neutral'
-  if (index === 2) return 'light'
+  if (index === 0) return ModuleDefaultColors[0]
+  if (index === 1) return ModuleDefaultColors[1]
+  if (index === 2) return ModuleDefaultColors[2]
 
-  return index % 3 === 0 ? 'dark' : index % 2 === 0 ? 'neutral' : 'light'
+  return ModuleDefaultColors[(index - 3) % 3]
 }
 
 export function getScore(color: PieceColor, board: BoardType): number {

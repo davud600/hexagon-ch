@@ -91,6 +91,10 @@ export type BoardContextData = {
     whiteScore: number
     blackScore: number
   }
+  TimersState: {
+    whiteTime: number
+    blackTime: number
+  }
   viewPreviousBoardInHistory: () => void
   viewNextBoardInHistory: () => void
   isViewingHistory: () => boolean

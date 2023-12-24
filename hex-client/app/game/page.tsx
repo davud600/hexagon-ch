@@ -1,11 +1,18 @@
 'use client'
 
 import Board from '@/components/board/board'
+import GameScores from '@/components/game/scores'
+import GameTimers from '@/components/game/timers'
 
 const Gameroom = () => {
   return (
-    <>
+    <div className="w-full h-full">
       <Board />
+
+      <div className="absolute w-full h-[90%] flex flex-col justify-end bg-transparent">
+        <GameTimers />
+        <GameScores />
+      </div>
 
       {/* <div className="flex align-middle justify-around">
         <div className="hidden md:flex md:items-center">settings</div>
@@ -21,7 +28,7 @@ const Gameroom = () => {
         </div>
         <div className="hidden md:flex md:items-center">info</div>
       </div> */}
-    </>
+    </div>
   )
 }
 export default Gameroom

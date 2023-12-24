@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
-    <main className="w-full h-[100vh]">
+    <main className="w-full h-full">
       <Header />
       {children}
     </main>
