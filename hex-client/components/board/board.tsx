@@ -1,9 +1,12 @@
 'use client'
 
+import { Pieces } from '@/constants/board-objects'
+import { getModuleColorFromRowIndex } from '@/lib/board/board'
 import { useEffect, useState } from 'react'
 import { BoardModule } from './module'
 
 export default function Board() {
+  console.log(Pieces)
   const [parentWidth, setParentWidth] = useState(window.innerWidth)
 
   // 23 * 1 / 20 * 1 = 23/20
@@ -63,6 +66,7 @@ export default function Board() {
       {firstRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number)}
             key={`firstRow ${number}`}
             index={number}
             rowIndex={number}
@@ -76,6 +80,7 @@ export default function Board() {
       {secondRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 1)}
             key={`secondRow ${number}`}
             index={number + firstRow.length}
             rowIndex={number}
@@ -89,8 +94,9 @@ export default function Board() {
       {thirdRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 2)}
             key={`thirdRow ${number}`}
-            index={number + secondRow.length}
+            index={number + secondRow.length + firstRow.length}
             rowIndex={number}
             width={width}
             height={height}
@@ -102,8 +108,11 @@ export default function Board() {
       {fourthRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number)}
             key={`fourthRow ${number}`}
-            index={number + thirdRow.length}
+            index={
+              number + thirdRow.length + secondRow.length + firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -115,8 +124,15 @@ export default function Board() {
       {fifthRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 1)}
             key={`fifthRow ${number}`}
-            index={number + fourthRow.length}
+            index={
+              number +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -128,8 +144,16 @@ export default function Board() {
       {sixthRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 2)}
             key={`sixthRow ${number}`}
-            index={number + fifthRow.length}
+            index={
+              number +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -141,8 +165,17 @@ export default function Board() {
       {seventhRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 1)}
             key={`seventhRow ${number}`}
-            index={number + sixthRow.length}
+            index={
+              number +
+              sixthRow.length +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -154,8 +187,18 @@ export default function Board() {
       {eighthRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number)}
             key={`eighthRow ${number}`}
-            index={number + seventhRow.length}
+            index={
+              number +
+              seventhRow.length +
+              sixthRow.length +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -167,8 +210,19 @@ export default function Board() {
       {ninethRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 2)}
             key={`ninethRow ${number}`}
-            index={number + eighthRow.length}
+            index={
+              number +
+              eighthRow.length +
+              seventhRow.length +
+              sixthRow.length +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -180,8 +234,20 @@ export default function Board() {
       {tenthRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number + 1)}
             key={`tenthRow ${number}`}
-            index={number + ninethRow.length}
+            index={
+              number +
+              ninethRow.length +
+              eighthRow.length +
+              seventhRow.length +
+              sixthRow.length +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}
@@ -193,8 +259,21 @@ export default function Board() {
       {eleventhRow.map((number) => {
         return (
           <BoardModule
+            color={getModuleColorFromRowIndex(number)}
             key={`eleventhRow ${number}`}
-            index={number + tenthRow.length}
+            index={
+              number +
+              tenthRow.length +
+              ninethRow.length +
+              eighthRow.length +
+              seventhRow.length +
+              sixthRow.length +
+              fifthRow.length +
+              fourthRow.length +
+              thirdRow.length +
+              secondRow.length +
+              firstRow.length
+            }
             rowIndex={number}
             width={width}
             height={height}

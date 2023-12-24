@@ -20,7 +20,7 @@ export const Dashboard = () => {
         <div className="flex flex-col gap-y-4">
           <Link
             className="bg-emerald-600 w-[13rem] h-[2.5rem] flex items-center justify-center rounded-md"
-            href="/gameroom"
+            href="/game"
           >
             <span className="text-white bg-emerald-600">Play</span>
           </Link>

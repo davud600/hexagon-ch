@@ -20,8 +20,12 @@ import {
   getPieceType,
 } from './piece'
 
-export function getModuleColorFromIndex(index: number): ModuleColor {
-  return 'light'
+export function getModuleColorFromRowIndex(index: number): ModuleColor {
+  if (index === 0) return 'dark'
+  if (index === 1) return 'neutral'
+  if (index === 2) return 'light'
+
+  return index % 3 === 0 ? 'dark' : index % 2 === 0 ? 'neutral' : 'light'
 }
 
 export function getScore(color: PieceColor, board: BoardType): number {
@@ -345,7 +349,7 @@ export function getBoardFromFEN(FEN: string): BoardType {
         updatedBoard[posIndex] += Pieces.rook
         break
       case 'b':
-        updatedBoard[posIndex] += Pieces.bishop
+        updatedBoard[posIndex] += Pieces?.bishop
         break
       case 'n':
         updatedBoard[posIndex] += Pieces.knight

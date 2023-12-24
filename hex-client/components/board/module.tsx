@@ -1,11 +1,12 @@
 import { useBoard } from '@/hooks/use-board'
 import { type DragEvent } from 'react'
-import { type ModuleColor, type Move } from '@/types/board'
-import BoardPiece from './Piece'
+import { ModuleColor, type Move } from '@/types/board'
 import { getPieceColor } from '@/lib/board/piece'
-import { getModuleColorFromIndex, movesIncludeMove } from '@/lib/board/board'
+import { movesIncludeMove } from '@/lib/board/board'
+import { ModuleColors } from '@/constants/board-objects'
 
 export function BoardModule({
+  color,
   index,
   rowIndex,
   width,
@@ -13,6 +14,7 @@ export function BoardModule({
   xPos,
   yPos,
 }: {
+  color: ModuleColor
   index: number
   rowIndex: number
   width: number
@@ -21,10 +23,6 @@ export function BoardModule({
   yPos: number
 }) {
   const { MovesState, SelectedPieceState, BoardState, makeMove } = useBoard()
-
-  console.log({ index })
-
-  let color = getModuleColorFromIndex(index)
 
   // Whether the piece should be highlighted
   if (SelectedPieceState.selectedPiece?.posIndex === index) {
@@ -38,8 +36,6 @@ export function BoardModule({
         color = 'legal'
     })
   }
-  const className = `hexagon hex ${color}`
-
   const handleOnDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
   }
@@ -112,6 +108,9 @@ export function BoardModule({
     // </div>
 
     <div
+      onDragOver={(e) => handleOnDragOver(e)}
+      onDrop={(e) => handleOnDrop(e)}
+      onClick={handleOnClick}
       key={`firstRow ${rowIndex}`}
       className="bg-transparent"
       style={{
@@ -121,11 +120,24 @@ export function BoardModule({
         transform: `translate(${xPos}px, ${yPos}px)`,
       }}
     >
-      <img
+      <svg
         className="bg-transparent w-full h-full"
-        src="test-hex.svg"
-        alt="hex"
-      />
+        style={{
+          fill: ModuleColors[color],
+        }}
+        version="1.2"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 185 161"
+        width="185"
+        height="161"
+      >
+        <title>hexagon-svgrepo-com-svg</title>
+        <path
+          id="Layer"
+          className="s0"
+          d="m0 80.4l46.2-80h92.4l46.2 80-46.2 80h-92.4z"
+        />
+      </svg>
     </div>
   )
 }

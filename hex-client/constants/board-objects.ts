@@ -8,6 +8,14 @@ import {
   type PiecesType,
 } from '@/types/board'
 
+export const ModuleColors = {
+  light: 'white',
+  neutral: 'gray',
+  dark: 'black',
+  legal: 'green',
+  selected: 'orange',
+}
+
 export const HexagonDirections: HexagonSides = {
   north: 'north',
   south: 'south',
