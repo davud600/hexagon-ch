@@ -6,7 +6,7 @@ import { GamesService } from '../services/games.service'
 import { RoomsService } from '../services/rooms.service'
 import { WaitListService } from '../services/wait-list.service'
 import { type GameSettings } from '../types/sockets/games'
-import { getRandomNumberByRange } from '../utils'
+import { getRandomOpponentFromWaitlist } from '../utils/wait-list'
 
 export function WaitListEvents() {
   io.on(WaitListEventsEnum.JoinWaitList, (socket, data) => {
@@ -14,11 +14,30 @@ export function WaitListEvents() {
 
     const socketsInWaitList = WaitListService.getAllSockets()
 
-    const randomSocketOpponent =
-      socketsInWaitList[getRandomNumberByRange(0, socketsInWaitList.length)]
+    if (socketsInWaitList.length === 0) {
+      try {
+        WaitListService.addSocket(socket)
+      } catch (error) {
+        console.error(error)
+      }
 
-    if (socketsInWaitList.length <= 1 || socket.id === randomSocketOpponent.id)
-      return WaitListService.addSocket(socket)
+      return
+    }
+
+    const randomSocketOpponent = getRandomOpponentFromWaitlist(
+      socket,
+      socketsInWaitList
+    )
+
+    if (!!!randomSocketOpponent) {
+      try {
+        WaitListService.addSocket(socket)
+      } catch (error) {
+        console.error(error)
+      }
+
+      return
+    }
 
     // create room
     const room = RoomsService.create({
@@ -56,6 +75,7 @@ export function WaitListEvents() {
       game,
       room,
     })
+
     io.to(randomSocketOpponent.id).emit(RoomEvents.Invite, {
       game,
       room,
